@@ -1,0 +1,49 @@
+DROP DATABASE IF EXISTS PEAKDB;
+CREATE database PEAKDB;
+USE PEAKDB;
+
+CREATE TABLE supplier(supplierCode int(6) PRIMARY KEY,supplierName varchar(100));
+
+CREATE TABLE process(processID int PRIMARY KEY, processType varchar(100));
+
+CREATE TABLE vehicule (vehiculeID int PRIMARY KEY, vehiculeName varchar(100));
+
+CREATE TABLE systemVeh (systemID int PRIMARY KEY, systemName varchar(100),
+                    lienVehicule int, FOREIGN KEY (lienVehicule) REFERENCES vehicule(vehiculeID));
+
+CREATE TABLE part(partnumber int(9) PRIMARY KEY, description varchar(100), materialgroup varchar(100),
+                    lienSupplier int(9), FOREIGN KEY (lienSupplier) REFERENCES supplier(supplierCode),
+                    lienProcess int, FOREIGN KEY (lienProcess) REFERENCES process(processID),
+                    lienSystem int, FOREIGN KEY (lienSystem) REFERENCES systemVeh(systemID));
+
+CREATE TABLE indexDriver(indexID int PRIMARY KEY , indexType varchar(100), indexOrigin varchar(100),
+                        indexAmount float);
+
+CREATE TABLE costDriver(costDriverID int PRIMARY KEY, type ENUM('Raw Material','profit','SG&A','scrap',
+                        'labor','packaging','other'), costDriverDescr varchar(100), costDriverPrice float,
+                        lienPartNumber int, FOREIGN KEY (lienPartNumber) REFERENCES part(partnumber),
+                        lienIndex int, FOREIGN KEY (lienIndex) REFERENCES indexDriver(indexID));
+
+
+INSERT INTO supplier (supplierCode, supplierName) VALUES (456345,'SupplierA'),(987465,'SupplierB')
+
+INSERT INTO process (processID, processType) VALUES (1111,'Stamping'),(1122,'Casting'),(1133,'Machining');
+
+INSERT INTO vehicule (vehiculeID, vehiculeName) VALUES (500000000,'SKIDOO'),(700000001,'Spyder');
+
+INSERT INTO systemVeh (systemID, systemName, lienVehicule) VALUES
+                    (540,'Frame',500000000),(740,'Frame',700000001),
+                    (550,'Suspension',500000000),(750,'Suspension',700000001);
+
+INSERT INTO part (partnumber, description, materialgroup, lienSupplier, lienProcess,lienSystem) VALUES
+                    (516786596,'Piece du Frame', 'stamping', 456345, 1111,540),
+                    (516786597,'Piece de suspension', 'stamping', 456345, 1111,550),
+                    (516786598,'Piece du Frame', 'stamping', 987465, 1111,540);
+
+INSERT INTO indexDriver (indexID, indexType, indexOrigin, indexAmount) VALUES
+                        (987,'ALU 1100','ProPurchaser',1.32),
+                        (867,'HSLA','ProPurchaser',1.22);
+
+
+
+
