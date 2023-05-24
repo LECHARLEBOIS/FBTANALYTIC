@@ -41,9 +41,29 @@ INSERT INTO part (partnumber, description, materialgroup, lienSupplier, lienProc
                     (516786598,'Piece du Frame', 'stamping', 987465, 1111,540);
 
 INSERT INTO indexDriver (indexID, indexType, indexOrigin, indexAmount) VALUES
-                        (987,'ALU 1100','ProPurchaser',1.32),
-                        (867,'HSLA','ProPurchaser',1.22);
+                        (987,'ALU 1100','ProPurchaser',1.11),
+                        (867,'HSLA','ProPurchaser',1.22),
+                        (767,'Strenx 1100','SSAB',1.45),
+                        (676,'Strenx 700','SSAB',1.32);
 
 
+INSERT INTO costDriver (costDriverID, type, costDriverDescr, costDriverPrice, lienPartNumber, lienIndex) VALUES
+                        (10, 'Raw Material','Strenx1100',0.12,516786596,767),
+                        (11, 'labor','labor',1.12,516786596,null),
+                        (12, 'Raw Material','component',0.34,516786596,867),
+                        (13,'Raw Material','strenx700',2.45,516786597,676),
+                        (14,'labor','labor',4.6,516786597,null),
+                        (15,'Raw Material','Strenx 700',2.3,516786598,676),
+                        (16,'Raw Material','Strenx 1100',0.54,516786598,767),
+                        (17,'labor','labor',1.76,516786598,null);
 
-
+DELIMITER //
+CREATE TRIGGER updateIndex
+AFTER UPDATE ON indexDriver
+FOR EACH ROW
+BEGIN
+    UPDATE costDriver
+    SET costDriverPrice = costDriverPrice * (NEW.indexAmount/OLD.indexAmount)
+    WHERE lienIndex = NEW.indexID;
+END//
+DELIMITER ;
