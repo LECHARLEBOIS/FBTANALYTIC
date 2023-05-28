@@ -19,43 +19,10 @@ CREATE TABLE part(partnumber int(9) PRIMARY KEY, description varchar(100), mater
 CREATE TABLE indexDriver(indexID int PRIMARY KEY , indexType varchar(100), indexOrigin varchar(100),
                         indexAmount float);
 
-CREATE TABLE costDriver(costDriverID int PRIMARY KEY, type ENUM('Raw Material','profit','SG&A','scrap',
+CREATE TABLE costDriver(costDriverID int PRIMARY KEY, costDriverType ENUM('Raw Material','profit','SG&A','scrap',
                         'labor','packaging','other'), costDriverDescr varchar(100), costDriverPrice float,
                         lienPartNumber int, FOREIGN KEY (lienPartNumber) REFERENCES part(partnumber),
                         lienIndex int, FOREIGN KEY (lienIndex) REFERENCES indexDriver(indexID));
-
-
-INSERT INTO supplier (supplierCode, supplierName) VALUES (456345,'SupplierA'),(987465,'SupplierB')
-
-INSERT INTO process (processID, processType) VALUES (1111,'Stamping'),(1122,'Casting'),(1133,'Machining');
-
-INSERT INTO vehicule (vehiculeID, vehiculeName) VALUES (500000000,'SKIDOO'),(700000001,'Spyder');
-
-INSERT INTO systemVeh (systemID, systemName, lienVehicule) VALUES
-                    (540,'Frame',500000000),(740,'Frame',700000001),
-                    (550,'Suspension',500000000),(750,'Suspension',700000001);
-
-INSERT INTO part (partnumber, description, materialgroup, lienSupplier, lienProcess,lienSystem) VALUES
-                    (516786596,'Piece du Frame', 'stamping', 456345, 1111,540),
-                    (516786597,'Piece de suspension', 'stamping', 456345, 1111,550),
-                    (516786598,'Piece du Frame', 'stamping', 987465, 1111,540);
-
-INSERT INTO indexDriver (indexID, indexType, indexOrigin, indexAmount) VALUES
-                        (987,'ALU 1100','ProPurchaser',1.11),
-                        (867,'HSLA','ProPurchaser',1.22),
-                        (767,'Strenx 1100','SSAB',1.45),
-                        (676,'Strenx 700','SSAB',1.32);
-
-
-INSERT INTO costDriver (costDriverID, type, costDriverDescr, costDriverPrice, lienPartNumber, lienIndex) VALUES
-                        (10, 'Raw Material','Strenx1100',0.12,516786596,767),
-                        (11, 'labor','labor',1.12,516786596,null),
-                        (12, 'Raw Material','component',0.34,516786596,867),
-                        (13,'Raw Material','strenx700',2.45,516786597,676),
-                        (14,'labor','labor',4.6,516786597,null),
-                        (15,'Raw Material','Strenx 700',2.3,516786598,676),
-                        (16,'Raw Material','Strenx 1100',0.54,516786598,767),
-                        (17,'labor','labor',1.76,516786598,null);
 
 DELIMITER //
 CREATE TRIGGER updateIndex
