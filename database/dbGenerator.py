@@ -1,4 +1,5 @@
 import pymysql
+
 def supplierGenerator ():
     conn = pymysql.connect(host='localhost', user='root', password='asdf1234', db='PEAKDB')
     cur = conn.cursor()
@@ -90,7 +91,7 @@ def costDriverGenerator ():
 
     with open("costDriverEntry","r") as file:
         for line in file:
-            costDriverID, costDriverType, costDriverPrice,costDriverDescr,lienPartNumber,lienIndex = line.split(",")
+            costDriverID, costDriverType,costDriverDescr,costDriverPrice,lienPartNumber,lienIndex = line.split(",")
             query = f"""INSERT INTO costDriver (costDriverID, costDriverType, costDriverDescr, costDriverPrice, lienPartNumber, lienIndex) VALUES ({costDriverID},'{costDriverType}','{costDriverDescr}',{costDriverPrice},{lienPartNumber},{lienIndex});"""
             cur.execute(query)
             conn.commit()
