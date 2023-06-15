@@ -4,6 +4,9 @@ USE PEAKDB;
 
 CREATE TABLE supplier(supplierCode int(6) PRIMARY KEY,supplierName varchar(100));
 
+CREATE TABLE supplier_contract(ID_contract varchar(20), clause_contrat MEDIUMTEXT,
+                               lienSupplier int, FOREIGN KEY (lienSupplier) REFERENCES supplier(supplierCode));
+
 CREATE TABLE process(processID int PRIMARY KEY, processType varchar(100));
 
 CREATE TABLE vehicule (vehiculeID int PRIMARY KEY, vehiculeName varchar(100));
@@ -23,6 +26,8 @@ CREATE TABLE costDriver(costDriverID int PRIMARY KEY, costDriverType ENUM('Raw M
                         'labor','packaging','other'), costDriverDescr varchar(100), costDriverPrice float,
                         lienPartNumber int, FOREIGN KEY (lienPartNumber) REFERENCES part(partnumber),
                         lienIndex int, FOREIGN KEY (lienIndex) REFERENCES indexDriver(indexID));
+
+CREATE TABLE activePrice (idActivePrice int, liencostDriver int, FOREIGN KEY (liencostDriver) REFERENCES costDriver(costDriverID));
 
 DELIMITER //
 CREATE TRIGGER updateIndex

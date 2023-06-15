@@ -4,47 +4,81 @@
     <meta charset="UTF-8">
     <title>peakDemo</title>
     <link rel="stylesheet" href="../static/stylesheet.css">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="container-top">
-    <h1>Peak Demo</h1>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">PEAK DATABASE</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Alert</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Update
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Prices</a></li>
+            <li><a class="dropdown-item" href="#">Index</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Request data</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">PowerBI</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<h3 class="h3">Current Supplier</h3>
+
+<div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Supplier #</th>
+          <th scope="col">Name</th>
+          <th scope="col">Specialty</th>
+          <th scope="col">Nb part in analysis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
 </div>
-<div class="container">
-    <div class="right-side-container-menu">
-        <button class="optionButton">option1</button>
-        <button class="optionButton">option2</button>
-        <button class="optionButton">option3</button>
-        <button class="optionButton">option4</button>
-        <button class="optionButton">option5</button>
-        <button class="optionButton">option6</button>
-    </div>
-
-    <div class="center-container-menu">
-
-    </div>
-    <div class="right-side-container-body">
-
-    </div>
-    <div class="center-container-body">
 
 
-    </div>
-
-
-    <div class="left-side-container-body">
-
-    </div>
-    <div>
-
-
-    </div>
-</div>
-
-<div class="footer">
-
-
-</div>
 
 </body>
 </html>
